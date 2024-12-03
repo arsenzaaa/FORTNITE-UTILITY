@@ -56,7 +56,10 @@ cls
 :mainMenu
 cls
 echo.
-echo        FORTNITE UTILITY BY ARSENZA
+echo              FORTNITE UTILITY BY ARSENZA
+echo.
+echo                    BUY HYPE TWEAKS
+echo               https://dsc.gg/hypetweaks
 echo.
 echo        1. Stop Epic Games Processes (wait for the game to fully load before closing)
 echo        2. Clear Fortnite Cache (the game will have to recompile the shaders)
@@ -88,7 +91,13 @@ cls
 echo.
 echo        Stopping Epic Games Processes...
 echo.
-for %%p in (EpicGamesLauncher.exe EpicWebHelper.exe Heroic.exe steam.exe CrashReportClient.exe) do (
+for %%p in (
+    EpicGamesLauncher.exe
+    EpicWebHelper.exe
+    Heroic.exe
+    steam.exe
+    CrashReportClient.exe
+) do (
     taskkill /F /IM %%p >nul 2>&1 && (
         echo [SUCCESS] %%p Process stopped.
     ) || (
@@ -124,23 +133,45 @@ cls
 echo.
 echo        Clearing Fortnite Cache...
 echo.
+
+for %%p in (
+    FortniteLauncher.exe
+    FortniteClient-Win64-Shipping_EAC_EOS.exe
+    FortniteClient-Win64-Shipping.exe
+    CrashReportClient.exe
+) do (
+    taskkill /F /IM %%p >nul 2>&1
+    echo %%p Process stopped... || echo %%p Not Found...
+)
+
 if exist "%userprofile%\AppData\Local\FortniteGame\Saved\Config\WindowsClient\GameUserSettings.ini" (
-    move "%userprofile%\AppData\Local\FortniteGame\Saved\Config\WindowsClient\GameUserSettings.ini" "%userprofile%\Desktop" > nul 2>&1 2>&1
+    move "%userprofile%\AppData\Local\FortniteGame\Saved\Config\WindowsClient\GameUserSettings.ini" "%userprofile%\Desktop" > nul 2>&1
 )
 
 if not exist "%userprofile%\AppData\Local\FortniteGame\Saved\Config\WindowsClient" (
     mkdir "%userprofile%\AppData\Local\FortniteGame\Saved\Config\WindowsClient"
 )
 
-move "%userprofile%\Desktop\GameUserSettings.ini" "%userprofile%\AppData\Local\FortniteGame\Saved\Config\WindowsClient" > nul 2>&1 2>&1
+move "%userprofile%\Desktop\GameUserSettings.ini" "%userprofile%\AppData\Local\FortniteGame\Saved\Config\WindowsClient" > nul 2>&1
 
-del /q /f "%userprofile%\AppData\Local\D3DSCache\*" > nul 2>&1 2>&1 & for /d %%p in ("%userprofile%\AppData\Local\D3DSCache\*") do rmdir /s /q "%%p" > nul 2>&1 2>&1
-del /q /f "%userprofile%\AppData\LocalLow\NVIDIA\PerDriverVersion\DXCache\*" > nul 2>&1 2>&1 & for /d %%p in ("%userprofile%\AppData\LocalLow\NVIDIA\PerDriverVersion\DXCache\*") do rmdir /s /q "%%p" > nul 2>&1 2>&1
+del /q /f "%userprofile%\AppData\Local\D3DSCache\*" > nul 2>&1
+for /d %%p in ("%userprofile%\AppData\Local\D3DSCache\*") do (
+    rmdir /s /q "%%p" > nul 2>&1
+)
 
-rd "%userprofile%\AppData\Local\CrashReportClient" /s /q > nul 2>&1 2>&1 & rd "%userprofile%\AppData\Local\EpicOnlineServicesUIHelper" /s /q > nul 2>&1 2>&1 & rd "%userprofile%\AppData\Local\EpicGamesLauncher\Saved\Config\CrashReportClient" /s /q > nul 2>&1 2>&1 & rd "%userprofile%\AppData\Local\EpicGamesLauncher\Saved\Logs" /s /q > nul 2>&1 2>&1 & rd "%userprofile%\AppData\Local\EpicGamesLauncher\Saved\webcache*" /s /q > nul 2>&1 2>&1
+del /q /f "%userprofile%\AppData\LocalLow\NVIDIA\PerDriverVersion\DXCache\*" > nul 2>&1
+for /d %%p in ("%userprofile%\AppData\LocalLow\NVIDIA\PerDriverVersion\DXCache\*") do (
+    rmdir /s /q "%%p" > nul 2>&1
+)
+
+rd "%userprofile%\AppData\Local\CrashReportClient" /s /q > nul 2>&1
+rd "%userprofile%\AppData\Local\EpicOnlineServicesUIHelper" /s /q > nul 2>&1
+rd "%userprofile%\AppData\Local\EpicGamesLauncher\Saved\Config\CrashReportClient" /s /q > nul 2>&1
+rd "%userprofile%\AppData\Local\EpicGamesLauncher\Saved\Logs" /s /q > nul 2>&1
+rd "%userprofile%\AppData\Local\EpicGamesLauncher\Saved\webcache*" /s /q > nul 2>&1
 
 for /r "%userprofile%\AppData\Roaming\EasyAntiCheat" %%f in (*.log) do (
-    del /f /q "%%f" > nul 2>&1 2>&1
+    del /f /q "%%f" > nul 2>&1
 )
 
 timeout 2 > nul 2>&1
@@ -179,6 +210,17 @@ cls
 echo.
 echo        Installing Performance Mode...
 echo.
+
+for %%p in (
+    FortniteLauncher.exe
+    FortniteClient-Win64-Shipping_EAC_EOS.exe
+    FortniteClient-Win64-Shipping.exe
+    CrashReportClient.exe
+) do (
+    taskkill /F /IM %%p >nul 2>&1
+    echo %%p Process stopped... || echo %%p Not Found...
+)
+
 powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/arsenzaaa/FORTNITE-UTILITY/refs/heads/main/GameUserSettings.ini' -OutFile '%temp%\GameUserSettings.ini'"
 
 if not exist "%temp%\GameUserSettings.ini" (
@@ -194,7 +236,8 @@ if not exist "%userprofile%\AppData\Local\FortniteGame\Saved\Config\WindowsClien
 move /Y "%temp%\GameUserSettings.ini" "%userprofile%\AppData\Local\FortniteGame\Saved\Config\WindowsClient\GameUserSettings.ini" >nul 2>&1
 
 timeout 2 > nul 2>&1
-echo. 
+
+echo.
 echo        Performance Mode Applied.
 echo.
 call :showReturnMessage
@@ -205,6 +248,16 @@ cls
 echo.
 echo        Switching to DirectX 12...
 echo.
+
+for %%p in (
+    FortniteLauncher.exe
+    FortniteClient-Win64-Shipping_EAC_EOS.exe
+    FortniteClient-Win64-Shipping.exe
+    CrashReportClient.exe
+) do (
+    taskkill /F /IM %%p >nul 2>&1
+    echo %%p Process stopped... || echo %%p Not Found...
+)
 
 powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/arsenzaaa/FORTNITE-UTILITY/refs/heads/main/GameUserSettings.ini' -OutFile '%temp%\GameUserSettings.ini'"
 

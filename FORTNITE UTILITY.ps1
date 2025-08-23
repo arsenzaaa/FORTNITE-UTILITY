@@ -252,6 +252,17 @@ $btnInstall.Button.Add_Click({
         $b1.FlatStyle='Flat'; try{$b1.FlatAppearance.BorderSize=0}catch{}; $b1.BackColor=[System.Drawing.Color]::FromArgb(70,70,70); $b1.ForeColor=[System.Drawing.Color]::White; $b1.Font=$FONT_TEXT; $b1.TextAlign="MiddleCenter"; $b1.Add_Click({ Apply-DefaultDX11; $dlg11.Close(); $dlg.Close() }); $dlg11.Controls.Add($b1)
         $b2=New-Object System.Windows.Forms.Button; $b2.Text="DX11 Performance (recommended)"; $b2.Size=New-Object System.Drawing.Size($W,$H); $b2.Location=New-Object System.Drawing.Point([int]($CX+$G/2),90)
         $b2.FlatStyle='Flat'; try{$b2.FlatAppearance.BorderSize=0}catch{}; $b2.BackColor=[System.Drawing.Color]::FromArgb(60,120,200); $b2.ForeColor=[System.Drawing.Color]::White; $b2.Font=$FONT_BUTTON; $b2.TextAlign="MiddleCenter"; $b2.Add_Click({ Apply-DX11-Performance; $dlg11.Close(); $dlg.Close() }); $dlg11.Controls.Add($b2)
+
+        # --- Cancel button for DX11 Options ---
+        $cancel11 = New-Object System.Windows.Forms.Button
+        $cancel11.Text="Cancel"; $cancel11.Size=New-Object System.Drawing.Size(100,30)
+        $cancel11.Location=New-Object System.Drawing.Point([int]($CX - $cancel11.Width/2), [int]($b1.Bottom + 24))
+        $cancel11.FlatStyle='Flat'; try{$cancel11.FlatAppearance.BorderSize=0}catch{}
+        $cancel11.BackColor=[System.Drawing.Color]::FromArgb(70,70,70); $cancel11.ForeColor=[System.Drawing.Color]::White; $cancel11.Font=$FONT_TEXT
+        $cancel11.Add_Click({ $dlg11.Close() })
+        $dlg11.Controls.Add($cancel11)
+        $dlg11.CancelButton = $cancel11
+        $dlg11.ClientSize = New-Object System.Drawing.Size($dlgW2, [int]($cancel11.Bottom + 20))
         [void]$dlg11.ShowDialog($dlg)
     })
     $dlg.Controls.Add($btnDX11Main)
@@ -273,7 +284,21 @@ $btnInstall.Button.Add_Click({
         $b3=New-Object System.Windows.Forms.Button; $b3.Text="DX12 Default"; $b3.Size=New-Object System.Drawing.Size($W,$H); $b3.Location=New-Object System.Drawing.Point([int]($CX-$G/2-$W),90)
         $b3.FlatStyle='Flat'; try{$b3.FlatAppearance.BorderSize=0}catch{}; $b3.BackColor=[System.Drawing.Color]::FromArgb(70,70,70); $b3.ForeColor=[System.Drawing.Color]::White; $b3.Font=$FONT_TEXT; $b3.TextAlign="MiddleCenter"; $b3.Add_Click({ Apply-DX12-Default; $dlg12.Close(); $dlg.Close() }); $dlg12.Controls.Add($b3)
         $b4=New-Object System.Windows.Forms.Button; $b4.Text="DX12 Performance (experimental)"; $b4.Size=New-Object System.Drawing.Size($W,$H); $b4.Location=New-Object System.Drawing.Point([int]($CX+$G/2),90)
-        $b4.FlatStyle='Flat'; try{$b4.FlatAppearance.BorderSize=0}catch{}; $b4.BackColor=[System.Drawing.Color]::FromArgb(60,120,200); $b4.ForeColor=[System.Drawing.Color]::White; $b4.Font=$FONT_BUTTON; $b4.TextAlign="MiddleCenter"; $b4.Add_Click({ Apply-DX12-Performance; $dlg12.Close(); $dlg.Close() }); $dlg12.Controls.Add($b4)
+        $b4.FlatStyle='Flat'; try{$b4.FlatAppearance.BorderSize=0}catch{}
+        # make it gray (not blue) like others
+        $b4.BackColor=[System.Drawing.Color]::FromArgb(70,70,70); $b4.ForeColor=[System.Drawing.Color]::White; $b4.Font=$FONT_TEXT
+        $b4.TextAlign="MiddleCenter"; $b4.Add_Click({ Apply-DX12-Performance; $dlg12.Close(); $dlg.Close() }); $dlg12.Controls.Add($b4)
+
+        # --- Cancel button for DX12 Options ---
+        $cancel12 = New-Object System.Windows.Forms.Button
+        $cancel12.Text="Cancel"; $cancel12.Size=New-Object System.Drawing.Size(100,30)
+        $cancel12.Location=New-Object System.Drawing.Point([int]($CX - $cancel12.Width/2), [int]($b3.Bottom + 24))
+        $cancel12.FlatStyle='Flat'; try{$cancel12.FlatAppearance.BorderSize=0}catch{}
+        $cancel12.BackColor=[System.Drawing.Color]::FromArgb(70,70,70); $cancel12.ForeColor=[System.Drawing.Color]::White; $cancel12.Font=$FONT_TEXT
+        $cancel12.Add_Click({ $dlg12.Close() })
+        $dlg12.Controls.Add($cancel12)
+        $dlg12.CancelButton = $cancel12
+        $dlg12.ClientSize = New-Object System.Drawing.Size($dlgW3, [int]($cancel12.Bottom + 20))
         [void]$dlg12.ShowDialog($dlg)
     })
     $dlg.Controls.Add($btnDX12Main)

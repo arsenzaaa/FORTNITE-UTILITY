@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+
+    <AssemblyTitle>Fortnite Utility</AssemblyTitle>
+    <Product>Fortnite Utility</Product>
+    <Description>Fortnite settings helper (AGPL-3.0-only)</Description>
+    <Authors>arsenza</Authors>
+    <Company>arsenza</Company>
+    <Copyright>Copyright © arsenza</Copyright>
+    <Version>0.0.1</Version>
+    <AssemblyVersion>0.0.1.0</AssemblyVersion>
+    <FileVersion>0.0.1.0</FileVersion>
+    <PackageLicenseExpression>AGPL-3.0-only</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/arsenzaaa/FORTNITE-UTILITY</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/arsenzaaa/FORTNITE-UTILITY</PackageProjectUrl>
+  </PropertyGroup>
+
+</Project>
